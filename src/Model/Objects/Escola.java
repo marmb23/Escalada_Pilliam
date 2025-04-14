@@ -2,17 +2,15 @@ package Model.Objects;
 
 public class Escola {
     public String nom;
-    public String lloc;
+    public String municipi;
     public String aproximacio;
-    public int numero_vies;
     public String popularitat;
     public String restriccions;
 
-    public Escola(String nom, String lloc, String aproximacio, int numero_vies, String popularitat, String restriccions) {
+    public Escola(String nom, String municipi, String aproximacio, String popularitat, String restriccions) {
         this.nom = nom;
-        this.lloc = lloc;
+        this.municipi = municipi;
         this.aproximacio = aproximacio;
-        this.numero_vies = numero_vies;
         this.popularitat = popularitat;
         this.restriccions = restriccions;
     }
@@ -25,20 +23,12 @@ public class Escola {
         this.nom = nom;
     }
 
-    public String getLloc() {
-        return lloc;
+    public String getMunicipi() {
+        return municipi;
     }
 
-    public void setLloc(String lloc) {
-        this.lloc = lloc;
-    }
-
-    public int getNumero_vies() {
-        return numero_vies;
-    }
-
-    public void setNumero_vies(int numero_vies) {
-        this.numero_vies = numero_vies;
+    public void setMunicipi(String lloc) {
+        this.municipi = municipi;
     }
 
     public String getAproximacio() {
@@ -69,9 +59,8 @@ public class Escola {
     public String toString() {
         return "Escola{" +
                 "nom='" + nom + '\'' +
-                ", lloc='" + lloc + '\'' +
+                ", lloc='" + municipi + '\'' +
                 ", aproximacio='" + aproximacio + '\'' +
-                ", numero_vies=" + numero_vies +
                 ", popularitat='" + popularitat + '\'' +
                 ", restriccions='" + restriccions + '\'' +
                 '}';
