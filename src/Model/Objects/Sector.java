@@ -3,20 +3,18 @@ package Model.Objects;
 public class Sector {
     public String nom;
     public String coordenades;
-    public String lloc;
     public String aproximacio;
-    public int numero_vies;
     public String popularitat;
     public String restriccions;
+    public Integer escola_id;
 
-    public Sector(String nom, String coordenades, String lloc, String aproximacio, int numero_vies, String popularitat, String restriccions) {
+    public Sector(String nom, String coordenades, String aproximacio, String popularitat, String restriccions, Integer escola_id) {
         this.nom = nom;
         this.coordenades = coordenades;
-        this.lloc = lloc;
         this.aproximacio = aproximacio;
-        this.numero_vies = numero_vies;
         this.popularitat = popularitat;
         this.restriccions = restriccions;
+        this.escola_id = escola_id;
     }
 
     public String getNom() {
@@ -35,28 +33,12 @@ public class Sector {
         this.coordenades = coordenades;
     }
 
-    public String getLloc() {
-        return lloc;
-    }
-
-    public void setLloc(String lloc) {
-        this.lloc = lloc;
-    }
-
     public String getAproximacio() {
         return aproximacio;
     }
 
     public void setAproximacio(String aproximacio) {
         this.aproximacio = aproximacio;
-    }
-
-    public int getNumero_vies() {
-        return numero_vies;
-    }
-
-    public void setNumero_vies(int numero_vies) {
-        this.numero_vies = numero_vies;
     }
 
     public String getPopularitat() {
@@ -75,16 +57,24 @@ public class Sector {
         this.restriccions = restriccions;
     }
 
+    public Integer getEscola_id() {
+        return escola_id;
+    }
+
+    public void setEscola_id(Integer escola_id) {
+        this.escola_id = escola_id;
+    }
+
     @Override
     public String toString() {
         return "Sector{" +
                 "nom='" + nom + '\'' +
                 ", coordenades='" + coordenades + '\'' +
-                ", lloc='" + lloc + '\'' +
                 ", aproximacio='" + aproximacio + '\'' +
-                ", numero_vies=" + numero_vies +
                 ", popularitat='" + popularitat + '\'' +
                 ", restriccions='" + restriccions + '\'' +
+                ", escola_id=" + escola_id +
                 '}';
     }
+
 }

@@ -2,28 +2,29 @@ package Model.Objects;
 
 public class Via {
     public String nom;
-    public int llargada;
+    public Integer llargada;
     public String dificultat;
     public String orientacio;
+    public String tipus;
     public String estat;
-    public String nom_escola;
-    public String nom_sector;
     public String ancoratge;
     public String roca;
-    public String creada_per;
+    public Integer creador_id;
+    public Integer escola_id;
+    public Integer sector_id;
 
-
-    public Via(String nom, int llargada, String dificultat, String orientacio, String nom_escola, String estat, String nom_sector, String ancoratge, String roca, String creada_per) {
+    public Via(String nom, Integer llargada, String dificultat, String orientacio, String tipus, String estat, String ancoratge, String roca, Integer creador_id, Integer escola_id, Integer sector_id) {
         this.nom = nom;
         this.llargada = llargada;
         this.dificultat = dificultat;
         this.orientacio = orientacio;
-        this.nom_escola = nom_escola;
+        this.tipus = tipus;
         this.estat = estat;
-        this.nom_sector = nom_sector;
         this.ancoratge = ancoratge;
         this.roca = roca;
-        this.creada_per = creada_per;
+        this.creador_id = creador_id;
+        this.escola_id = escola_id;
+        this.sector_id = sector_id;
     }
 
     public String getNom() {
@@ -34,11 +35,11 @@ public class Via {
         this.nom = nom;
     }
 
-    public int getLlargada() {
+    public Integer getLlargada() {
         return llargada;
     }
 
-    public void setLlargada(int llargada) {
+    public void setLlargada(Integer llargada) {
         this.llargada = llargada;
     }
 
@@ -58,28 +59,20 @@ public class Via {
         this.orientacio = orientacio;
     }
 
+    public String getTipus() {
+        return tipus;
+    }
+
+    public void setTipus(String tipus) {
+        this.tipus = tipus;
+    }
+
     public String getEstat() {
         return estat;
     }
 
     public void setEstat(String estat) {
         this.estat = estat;
-    }
-
-    public String getNom_escola() {
-        return nom_escola;
-    }
-
-    public void setNom_escola(String nom_escola) {
-        this.nom_escola = nom_escola;
-    }
-
-    public String getNom_sector() {
-        return nom_sector;
-    }
-
-    public void setNom_sector(String nom_sector) {
-        this.nom_sector = nom_sector;
     }
 
     public String getAncoratge() {
@@ -98,12 +91,28 @@ public class Via {
         this.roca = roca;
     }
 
-    public String getCreada_per() {
-        return creada_per;
+    public Integer getCreador_id() {
+        return creador_id;
     }
 
-    public void setCreada_per(String creada_per) {
-        this.creada_per = creada_per;
+    public void setCreador_id(Integer creador_id) {
+        this.creador_id = creador_id;
+    }
+
+    public Integer getEscola_id() {
+        return escola_id;
+    }
+
+    public void setEscola_id(Integer escola_id) {
+        this.escola_id = escola_id;
+    }
+
+    public Integer getSector_id() {
+        return sector_id;
+    }
+
+    public void setSector_id(Integer sector_id) {
+        this.sector_id = sector_id;
     }
 
     @Override
@@ -113,12 +122,14 @@ public class Via {
                 ", llargada=" + llargada +
                 ", dificultat='" + dificultat + '\'' +
                 ", orientacio='" + orientacio + '\'' +
+                ", tipus='" + tipus + '\'' +
                 ", estat='" + estat + '\'' +
-                ", nom_escola='" + nom_escola + '\'' +
-                ", nom_sector='" + nom_sector + '\'' +
                 ", ancoratge='" + ancoratge + '\'' +
                 ", roca='" + roca + '\'' +
-                ", creada_per='" + creada_per + '\'' +
+                ", creador_id=" + creador_id +
+                ", escola_id=" + escola_id +
+                ", sector_id=" + sector_id +
                 '}';
     }
+
 }

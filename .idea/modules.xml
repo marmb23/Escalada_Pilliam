@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Escalada_Pillam.iml" filepath="$PROJECT_DIR$/Escalada_Pillam.iml" />
+      <module fileurl="file://$PROJECT_DIR$/escalada.iml" filepath="$PROJECT_DIR$/escalada.iml" />
     </modules>
   </component>
 </project>
