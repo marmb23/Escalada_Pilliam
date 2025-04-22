@@ -95,7 +95,7 @@ public class ViaDAO {
      * Elimina un registre de la taula 'vies' a la base de dades basada en l'ID de la via proporcionada.
      * Si el registre específic existeix, serà eliminat. Si no existeix, es mostrarà un missatge indicant el contrari.
      *
-     * @param id_via l'identificador de la via associada que es vol eliminar
+     * @param id_escola l'identificador de la via associada que es vol eliminar
      * @throws SQLException si es produeix un error d'accés a la base de dades durant l'operació
      */
     public static void eliminarVia(Integer id_escola) throws SQLException {
@@ -121,7 +121,7 @@ public class ViaDAO {
      * Llista una única via de la base de dades basant-se en l'ID proporcionat.
      * Executa una consulta per recuperar informació detallada sobre una via incloent-hi les seves propietats
      *
-     * @param id_via l'ID de la via que es vol veure.
+     * @param id_escola l'ID de la via que es vol veure.
      * @throws SQLException si es produeix un error durant l'accés a la base de dades o l'execució de la consulta
      */
     public static void llistarUnaVia(Integer id_escola) throws SQLException {
