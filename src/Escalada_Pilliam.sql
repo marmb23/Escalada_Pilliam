@@ -53,7 +53,6 @@ CREATE TABLE vies (
     temps_no_apte INTEGER DEFAULT 30,
     tipus_roca VARCHAR(50),
     creador_id INTEGER,
-    escola_id INTEGER NOT NULL,
     sector_id INTEGER NOT NULL,
     CONSTRAINT vies_llargada_check CHECK (llargada > 0),
     CONSTRAINT grau_dificultat_check CHECK (grau_dificultat ~ '^[4-9]([abcABC])?[+-]?$'),
@@ -122,19 +121,32 @@ BEGIN
 END;
 $$;
 
-CREATE OR REPLACE FUNCTION trg_check_via_estat() RETURNS TRIGGER
-    LANGUAGE plpgsql
-AS
-$$
+CREATE OR REPLACE FUNCTION actualitzar_data_estat()
+    RETURNS TRIGGER AS $$
 BEGIN
-    IF OLD.estat IN ('construccio', 'tancada')
-        AND EXTRACT(DAY FROM (NOW() - OLD.data_canvi_estat)) >= OLD.temps_no_apte THEN
-        NEW.estat := 'apte';
-        NEW.data_canvi_estat := NOW();
+    -- 1. Actualizar vías que ya deben estar en 'apte'
+    UPDATE vies
+    SET estat = 'apte'
+    WHERE estat IN ('tancada', 'construccio')
+      AND data_canvi_estat IS NOT NULL
+      AND data_canvi_estat  + (temps_no_apte || ' minutes')::interval <= NOW();
+
+    -- 2. Si la vía que se está insertando/actualizando ahora cambia a tancada o construccio,
+    --    guardamos la fecha actual en data_estat
+    IF TG_OP = 'UPDATE' AND NEW.estat IN ('tancada', 'construccio') AND (OLD.estat IS DISTINCT FROM NEW.estat) THEN
+        NEW.data_canvi_estat  := CURRENT_TIMESTAMP;
+    ELSIF TG_OP = 'INSERT' AND NEW.estat IN ('tancada', 'construccio') THEN
+        NEW.data_canvi_estat  := CURRENT_TIMESTAMP;
     END IF;
+
     RETURN NEW;
 END;
-$$;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_general_estats
+    BEFORE INSERT OR UPDATE ON vies
+    FOR EACH ROW
+EXECUTE FUNCTION actualitzar_data_estat();
 
 CREATE OR REPLACE TRIGGER trg_after_insert_via
     AFTER INSERT

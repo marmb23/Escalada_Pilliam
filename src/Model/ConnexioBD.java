@@ -15,7 +15,7 @@ public class ConnexioBD {
      * Estableix i torna una connexió a la base de dades utilitzant les credencials especificades.
      * URL, usuari i contrasenya especificats.
      *
-     * @torna un objecte {@code Connection} per interactuar amb la base de dades.
+     * @return un objecte {@code Connection} per interactuar amb la base de dades.
      * @throws SQLException si es produeix un error d'accés a la base de dades o la URL de la base de dades no és vàlida.
      */
     public static Connection getConnexio() throws SQLException{

@@ -10,10 +10,9 @@ public class Via {
     public String ancoratge;
     public String roca;
     public Integer creador_id;
-    public Integer escola_id;
     public Integer sector_id;
 
-    public Via(String nom, Integer llargada, String dificultat, String orientacio, String tipus, String estat, String ancoratge, String roca, Integer creador_id, Integer escola_id, Integer sector_id) {
+    public Via(String nom, Integer llargada, String dificultat, String orientacio, String tipus, String estat, String ancoratge, String roca, Integer creador_id, Integer sector_id) {
         this.nom = nom;
         this.llargada = llargada;
         this.dificultat = dificultat;
@@ -23,7 +22,6 @@ public class Via {
         this.ancoratge = ancoratge;
         this.roca = roca;
         this.creador_id = creador_id;
-        this.escola_id = escola_id;
         this.sector_id = sector_id;
     }
 
@@ -99,14 +97,6 @@ public class Via {
         this.creador_id = creador_id;
     }
 
-    public Integer getEscola_id() {
-        return escola_id;
-    }
-
-    public void setEscola_id(Integer escola_id) {
-        this.escola_id = escola_id;
-    }
-
     public Integer getSector_id() {
         return sector_id;
     }
@@ -127,7 +117,6 @@ public class Via {
                 ", ancoratge='" + ancoratge + '\'' +
                 ", roca='" + roca + '\'' +
                 ", creador_id=" + creador_id +
-                ", escola_id=" + escola_id +
                 ", sector_id=" + sector_id +
                 '}';
     }

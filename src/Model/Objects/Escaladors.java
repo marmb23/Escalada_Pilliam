@@ -3,21 +3,19 @@ package Model.Objects;
 public class Escaladors {
     public String nom;
     public String alies;
-    public int edat;
+    public Integer edat;
     public String nivell;
-    public String nom_via;
     public String estil_preferit;
-    public String historial;
     public String fita;
+    public Integer viamaxim_id;
 
-    public Escaladors(String nom, String alies, int edat, String nivell, String nom_via, String estil_preferit, String historial, String fita) {
+    public Escaladors(String nom, String alies, Integer edat, String nivell, String estil_preferit, String fita, Integer viamaxim_id) {
         this.nom = nom;
         this.alies = alies;
         this.edat = edat;
         this.nivell = nivell;
-        this.nom_via = nom_via;
         this.estil_preferit = estil_preferit;
-        this.historial = historial;
+        this.viamaxim_id = viamaxim_id;
         this.fita = fita;
     }
 
@@ -53,28 +51,12 @@ public class Escaladors {
         this.nivell = nivell;
     }
 
-    public String getNom_via() {
-        return nom_via;
-    }
-
-    public void setNom_via(String nom_via) {
-        this.nom_via = nom_via;
-    }
-
     public String getEstil_preferit() {
         return estil_preferit;
     }
 
     public void setEstil_preferit(String estil_preferit) {
         this.estil_preferit = estil_preferit;
-    }
-
-    public String getHistorial() {
-        return historial;
-    }
-
-    public void setHistorial(String historial) {
-        this.historial = historial;
     }
 
     public String getFita() {
@@ -85,6 +67,14 @@ public class Escaladors {
         this.fita = fita;
     }
 
+    public Integer getViaMaxim_id() {
+        return viamaxim_id;
+    }
+
+    public void setViaMaxim_id(Integer viamaxim_id) {
+        this.viamaxim_id = viamaxim_id;
+    }
+
     @Override
     public String toString() {
         return "Escaladors{" +
@@ -92,10 +82,9 @@ public class Escaladors {
                 ", alies='" + alies + '\'' +
                 ", edat=" + edat +
                 ", nivell='" + nivell + '\'' +
-                ", nom_via='" + nom_via + '\'' +
                 ", estil_preferit='" + estil_preferit + '\'' +
-                ", historial='" + historial + '\'' +
                 ", fita='" + fita + '\'' +
+                ", viamaxim_id=" + viamaxim_id +
                 '}';
     }
 }

@@ -1,5 +1,6 @@
 package Controlador;
 
+import Model.Objects.Escaladors;
 import Model.Objects.Escola;
 import Model.Objects.Sector;
 import Model.Objects.Via;
@@ -17,16 +18,16 @@ public class Menus_Demanar_Dades {
     ///--------------------------------------------------------------------------- ESCOLES -------------------------------------------------------------------------------------------------///
     ///#####################################################################################################################################################################################///
     /**
-     * Crea un nou objecte Escola després d'obtenir les dades necessàries com el nom, municipi, aproximació,
-     * popularitat i restriccions de l'escola a través d'entrades de l'usuari.
+     * Crea un nou objecte Escola després d'obtenir les dades necessàries com el nom, municipi, aproximació, popularitat
+     * i restriccions de l'escola a través d'entrades de l'usuari.
      *
-     * @return un objecte de tipus Escola amb les propietats inicialitzades segons les dades introduïdes.
+     * @return un objecte Escola amb les dades introduïdes.
      */
     public static Escola crearEscola() {
         System.out.println("+----------------- CREAR UNA ESCOLA -----------------+");
         System.out.println("+----------------------------------------------------+");
 
-        // Solicitar les dades necessàries a l'usuari per crear l'objecte.
+        // Solicitar les dades necessàries a l'usuari per crear l'objecte d'Escola.
         String nom = solicitarString("Introdueix el nom de l'escola:");
         String municipi = solicitarString("Introdueix el municipi de l'escola:");
         String aproximacio = solicitarString("Descriu breument com s'arriba:");
@@ -40,10 +41,10 @@ public class Menus_Demanar_Dades {
      * Modifica les dades d'una escola a la base de dades segons la informació proporcionada per l'usuari.
      *
      * Aquesta funció permet a l'usuari seleccionar una escola pel seu nom i modificar un camp específic de les seves dades.
-     * La funció valida el camp introduït abans d'intentar realitzar la modificació.
-     * Si el camp no és vàlid o no es troba l'escola a la base de dades, es notifica a l'usuari.
+     * La funció valida el camp introduït abans d'intentar realitzar la modificació. Si el camp no és vàlid o no es troba
+     * l'escola a la base de dades, es notifica a l'usuari.
      *
-     * @throws SQLException si ocorre un error en accedir o modificar la base de dades.
+     * @throws SQLException Error en accedir o modificar la base de dades.
      */
     public static void editarEscola() throws SQLException {
         System.out.println("+--------------- MODIFICAR UNA ESCOLA ---------------+");
@@ -75,10 +76,8 @@ public class Menus_Demanar_Dades {
     }
 
     /**
-     * Mostra un avís a l'usuari sol·licitant l'ID d'una escola a esborrar
-     * i retorna l'ID donat com a nombre enter.
-     * @return l'ID del centre que es vol eliminar, introduït com a cadena per l'usuari
-     * i convertit a un nombre sencer.
+     * Sol·licita l'ID d'una escola a esborrar i retorna l'ID donat com a nombre enter.
+     * @return l'ID de l'escola que es vol eliminar, introduït com a string per l'usuari i convertit a un nombre sencer.
      */
     public static Integer esborrarEscola() {
         System.out.println("+---------------- ELIMINAR UNA ESCOLA ---------------+");
@@ -87,10 +86,10 @@ public class Menus_Demanar_Dades {
     }
 
     /**
-     * Mostra un missatge demanant a l'usuari que especifiqui quina escola vol veure
-     * i recupera l'ID de l'escola com a nombre enter.
+     * Mostra un missatge demanant a l'usuari que especifiqui quina escola vol veure i recupera l'ID de l'escola com a
+     * nombre enter.
      *
-     * @return l'ID de l'escola seleccionada proporcionada per l'usuari, convertida d'una cadena a un nombre enter.
+     * @return l'ID de l'escola seleccionada proporcionada per l'usuari, convertida d'un string a un nombre enter.
      */
     public static Integer llistarEscola() {
         return Integer.valueOf(solicitarString("Quina escola vols veure?"));
@@ -101,16 +100,16 @@ public class Menus_Demanar_Dades {
     ///--------------------------------------------------------------------------- SECTORS -------------------------------------------------------------------------------------------------///
     ///#####################################################################################################################################################################################///
     /**
-     * Crea un nou objecte de tipus Sector després d'obtenir les dades necessàries mitjançant l'entrada de l'usuari.
-     * Les dades inclouen el nom del sector, coordenades, aproximació, popularitat, restriccions i l'ID de l'escola al qual pertany.
+     * Crea un nou objecte Sector després d'obtenir les dades necessàries com el nom, coordenades, aproximació, popularitat
+     * i restriccions de l'escola a través d'entrades de l'usuari.
      *
-     * @return un objecte de tipus Sector amb les propietats inicialitzades segons les dades proporcionades per l'usuari.
+     * @return un objecte Sector amb les dades introduïdes.
      */
     public static Sector crearSector() {
         System.out.println("+------------------ CREAR UN SECTOR -----------------+");
         System.out.println("+----------------------------------------------------+");
 
-        // Solicitar les dades necessàries a l'usuari per crear l'objecte.
+        // Solicitar les dades necessàries a l'usuari per crear l'objecte Sector.
         String nom = solicitarString("Introdueix el nom del sector:");
         String coordenades = solicitarString("Introdueix les coordenades del sector:");
         String aproximacio = solicitarString("Descriu breument com s'arriba:");
@@ -122,18 +121,13 @@ public class Menus_Demanar_Dades {
     }
 
     /**
-     * Permet modificar un sector existent a la base de dades segons la informació proporcionada per l'usuari.
+     * Modifica les dades d'un sector a la base de dades segons la informació proporcionada per l'usuari.
      *
-     * Aquesta funció mostra un menú interactiu que permet a l'usuari especificar:
-     * - El nom del sector a modificar.
-     * - El camp específic que es desitja actualitzar.
-     * - El nou valor que es vol assignar al camp seleccionat.
+     * Aquesta funció permet a l'usuari seleccionar un sector pel seu nom i modificar un camp específic de les seves dades.
+     * La funció valida el camp introduït abans d'intentar realitzar la modificació. Si el camp no és vàlid o no es troba
+     * el sector a la base de dades, es notifica a l'usuari.
      *
-     * Una vegada confirmats el nom, el camp, i el nou valor, es crida a la funció `modificarSector` per
-     * realitzar els canvis a la base de dades. Si el camp introduït és invàlid, la funció notifica que
-     * l'operació ha estat cancel·lada.
-     *
-     * @throws SQLException Si ocorre un error en accedir o modificar la base de dades.
+     * @throws SQLException Error en accedir o modificar la base de dades.
      */
     public static void editarSector() throws SQLException {
         System.out.println("+---------------- MODIFICAR UN SECTOR ---------------+");
@@ -165,11 +159,9 @@ public class Menus_Demanar_Dades {
     }
 
     /**
-     * Solicita a l'usuari la identificació d'un sector que es desitja eliminar
-     * i retorna aquesta identificació convertida a un nombre enter.
+     * Sol·licita l'ID d'un sector a esborrar i retorna l'ID donat com a nombre enter
      *
-     * @return l'ID del sector a eliminar, introduït com a cadena per l'usuari
-     * i convertit a un nombre enter.
+     * @return l'ID del centre que es vol eliminar, introduït com a string per l'usuari i convertit a un nombre sencer.
      */
     public static Integer esborrarSector() {
         System.out.println("+---------------- ELIMINAR UN SECTOR ----------------+");
@@ -178,10 +170,10 @@ public class Menus_Demanar_Dades {
     }
 
     /**
-     * Solicita a l'usuari que introdueixi la identificació d'un sector que es vol consultar
-     * i retorna aquesta identificació convertida a un nombre enter.
+     * Mostra un missatge demanant a l'usuari que especifiqui quin sector vol veure i recupera l'ID del sector com a
+     * nombre enter.
      *
-     * @return l'ID del sector seleccionat proporcionat per l'usuari, convertit d'una cadena a un nombre enter.
+     * @return l'ID del sector seleccionat proporcionat per l'usuari, convertit d'un string a un nombre enter.
      */
     public static Integer llistarSector() {
         return Integer.valueOf(solicitarString("Quin sector vols veure (Escriu la ID)?"));
@@ -191,11 +183,10 @@ public class Menus_Demanar_Dades {
     ///----------------------------------------------------------------------------- VIES --------------------------------------------------------------------------------------------------///
     ///#####################################################################################################################################################################################///
     /**
-     * Crea un nou objecte de tipus Via després d'obtenir totes les dades necessàries mitjançant
-     * interacció amb l'usuari. Aquestes dades inclouen informació com el nom, llargada, dificultat,
-     * orientació, tipus, estat, ancoratge, tipus de roca, i associacions a creador, escola i sector.
+     * Crea un nou objecte Via després d'obtenir les dades necessàries com el nom, llargada, dificultat, orientació,
+     * tipus, estat, ancoratge, roca, creador_id i sector_id de la via a través d'entrades de l'usuari.
      *
-     * @return un objecte de tipus Via amb les propietats inicialitzades segons les dades introduïdes per l'usuari.
+     * @return un objecte Via amb les dades introduïdes.
      */
     public static Via crearVia() {
         System.out.println("+----------------------------- CREAR UNA VIA ------------------------------+");
@@ -211,25 +202,19 @@ public class Menus_Demanar_Dades {
         String ancoratge = solicitarString("Introdueix l'ancoratge de la via:");
         String roca = solicitarString("Introdueix el tipus de roca:");
         Integer creador_id = Integer.valueOf(solicitarString("Introdueix l'ID de l'usuari que ha creat la via: "));
-        Integer escola_id = Integer.valueOf(solicitarString("Introdueix l'ID de l'escola al que pertany la via: "));
         Integer sector_id = Integer.valueOf(solicitarString("Introdueix l'ID del sector al que pertany la via: "));
 
-        return new Via(nom, llargada, dificultat, orientacio, tipus, estat, ancoratge, roca, creador_id, escola_id, sector_id);
+        return new Via(nom, llargada, dificultat, orientacio, tipus, estat, ancoratge, roca, creador_id, sector_id);
     }
 
     /**
-     * Permet modificar les dades d'una via existent en la base de dades segons la informació proporcionada
-     * per l'usuari. Aquesta funció proporciona un menú interactiu on l'usuari pot:
-     * - Seleccionar la via a modificar pel seu nom.
-     * - Escollir el camp específic que desitja modificar (nom, llargada, dificultat, orientació, tipus,
-     *   estat, ancoratge o roques).
-     * - Especificar el nou valor del camp seleccionat.
+     * Modifica les dades d'una via a la base de dades segons la informació proporcionada per l'usuari.
      *
-     * La funció valida que el camp seleccionat per l'usuari sigui vàlid i, en cas afirmatiu, crida
-     * a la funció `modificarVia` per executar els canvis corresponents a la base de dades.
-     * Si el camp introduït és invàlid, l'operació es cancel·la i s'informa l'usuari.
+     * Aquesta funció permet a l'usuari seleccionar una via pel seu nom i modificar un camp específic de les seves dades.
+     * La funció valida el camp introduït abans d'intentar realitzar la modificació. Si el camp no és vàlid o no es troba
+     * la via a la base de dades, es notifica a l'usuari.
      *
-     * @throws SQLException si es produeix un error en accedir o modificar la base de dades.
+     * @throws SQLException Error en accedir o modificar la base de dades.
      */
     public static void editarVia() throws SQLException {
         System.out.println("+----------------- MODIFICAR UNA VIA ----------------+");
@@ -267,11 +252,9 @@ public class Menus_Demanar_Dades {
     }
 
     /**
-     * Mostra un missatge interactiu per a eliminar una via, sol·licitant l'introducció
-     * de l'ID de la via que es desitja eliminar. Retorna l'ID introduït per l'usuari
-     * com un nombre enter.
+     * Mostra un missatge interactiu per a eliminar una via, sol·licitant l'ID de la via que es desitja eliminar.
      *
-     * @return l'ID de la via a eliminar, introduït com a cadena per l'usuari i convertit a un nombre enter.
+     * @return l'ID de la via a eliminar, introduït com a string per l'usuari i convertit a un nombre enter.
      */
     public static Integer esborrarVia() {
         System.out.println("+--------------------- ELIMINAR UNA VIA ---------------------+");
@@ -280,10 +263,9 @@ public class Menus_Demanar_Dades {
     }
 
     /**
-     * Solicita a l'usuari que introdueixi la identificació d'una via que vol consultar
-     * i retorna aquesta identificació com un nombre enter.
-     *
-     * @return l'ID de la via seleccionada proporcionat per l'usuari, convertit d'una cadena a un nombre enter.
+     * Mostra un missatge interactiu per a llistar una via, sol·licitant l'introducció de la ID de la via que es vol
+     * veure.
+     * @return l'ID de la via seleccionada proporcionat per l'usuari, convertit d'un string a un nombre enter.
      */
     public static Integer llistarVia() {
         return Integer.valueOf(solicitarString("Quina via vols veure (Escriu la ID)?"));
@@ -293,19 +275,151 @@ public class Menus_Demanar_Dades {
     ///-------------------------------------------------------------------------- ESCALADORS -----------------------------------------------------------------------------------------------///
     ///#####################################################################################################################################################################################///
 
+    /**
+     * Crea un nou objecte Escalador després d'obtenir les dades necessàries com el nom, l'àlies, l'edat, el nivell màxim,
+     * l'estil preferit, fita i l'ID de la via a través d'entrades de l'usuari.
+     *
+     * @return un objecte Escalador amb les dades introduïdes.
+     */
+    public static Escaladors crearEscalador() {
+        System.out.println("+---------------- CREAR UN ESCALADOR ----------------+");
+        System.out.println("+----------------------------------------------------+");
 
+        // Solicitar les dades necessàries a l'usuari per crear l'objecte.
+        String nom = solicitarString("Introdueix el nom de l'escalador:");
+        String alias = solicitarString("Introdueix l'àlies de l'escalador:");
+        Integer edat = Integer.valueOf(solicitarString("Introdueix l'edat de l'escalador (en anys):"));
+        String nivell_maxim = solicitarString("Introdueix el nivell màxim de l'escalador (4,4+,5,5+,6a,6a+,6b,6b+,6c,6c+,7a,7a+,7b,7b+,7c,7c+,8a,8a+,8b,8b+,8c,8c+,9a,9a+,9b,9b+,9c,9c+):").toLowerCase();
+        String estil_preferit = solicitarString("Digues l'estil preferit (clàssica, gel, esportives):").toLowerCase();
+        String fita = solicitarString("Escriu la fita: ");
+        Integer viamaxima_id = Integer.valueOf(solicitarString("Digues l'ID de la via que més lluny a arribat: "));
+
+        return new Escaladors(nom, alias, edat, nivell_maxim, estil_preferit, fita, viamaxima_id);
+    }
+
+    /**
+     * Modifica les dades d'un escalador a la base de dades segons la informació proporcionada per l'usuari.
+     *
+     * Aquesta funció permet a l'usuari seleccionar un escalador pel seu nom i modificar un camp específic de les seves dades.
+     * La funció valida el camp introduït abans d'intentar realitzar la modificació. Si el camp no és vàlid o no es troba
+     * l'escalador a la base de dades, es notifica a l'usuari.
+     *
+     * @throws SQLException Error en accedir o modificar la base de dades.
+     */
+    public static void editarEscalador() throws SQLException {
+        System.out.println("+-------------- MODIFICAR UN ESCALADOR --------------+");
+        System.out.println("+----------------------------------------------------+");
+
+        // Solicitar les dades necessàries a l'usuari per modificar la base de dades.
+        String nom = solicitarString("Quin escalador vols modificar?");
+        System.out.println("Camps disponibles per modificar:");
+        System.out.println("• Nom");
+        System.out.println("• Alias");
+        System.out.println("• Edat");
+        System.out.println("• Nivell_maxim");
+        System.out.println("• Estil_preferit");
+        System.out.println("• Fita");
+        String camp = solicitarString("Quin camp vols modificar?").toLowerCase();
+        String nouValor = solicitarString("Què vols posar?");
+
+        // Validar el campo ingresado por el usuario
+        switch (camp) {
+            case "nom":
+            case "alias":
+            case "edat":
+            case "nivell_maxim":
+            case "estil_preferit":
+            case "fita":
+                modificarEscola(nom, camp, nouValor);
+                break;
+            default:
+                System.out.println("El camp introduït no és vàlid. Operació cancel·lada.");
+        }
+    }
+
+    /**
+     * Demana a l'usuari que introdueixi l'ID d'un escalador a eliminar.
+     *
+     * @return Sol·licitar la ID de l'escalador que es vol esborrar.
+     */
+    public static Integer esborrarEscalador() {
+        System.out.println("+--------------- ELIMINAR UN ESCALADOR --------------+");
+        System.out.println("+----------------------------------------------------+");
+        return Integer.valueOf(solicitarString("Introdueix la ID de l'escalador que vols eliminar: "));
+    }
+
+    /**
+     * Demana a l'usuari que introdueixi l'identificador de l'escalador que es vol veure.
+     *
+     * @return Sol·licitar l'ID de l'escalador que vols veure.
+     */
+    public static Integer llistarEscalador() {
+        return Integer.valueOf(solicitarString("Quin escalador vols veure?"));
+    }
+
+    ///#####################################################################################################################################################################################///
+    ///------------------------------------------------------------------------- ESTADÍSTIQUES ---------------------------------------------------------------------------------------------///
+    ///#####################################################################################################################################################################################///
+    /**
+     * Solicita el nom d'una escola a l'usuari per veure les vies disponibles associades a aquesta escola.
+     *
+     * @return El nom de l'escola introduït per l'usuari.
+     */
+    public static String viesDisponibles () {
+        return solicitarString("De quina escola vols veure les vies disponibles? (Escriu el nom)");
+    }
+
+    /**
+     * Solicita a l'usuari que introdueixi una dificultat mínima i una dificultat màxima i retorna aquests dos
+     * valors com un array d'strings.
+     *
+     * @return Un array de dos strings que corresponen a la dificultat mínima i la dificultat màxima introduïdes per
+     * l'usuari.
+     */
+    public static String[] viesPerDificultat() {
+        String minDif = solicitarString("Introdueix la mínima dificultat: ");
+        String maxDif = solicitarString("Introdueix la màxima dificultat: ");
+        return new String[]{minDif, maxDif};
+    }
+
+    /**
+     * Solicita a l'usuari que introdueixi un estat per buscar les vies amb aquest estat.
+     *
+     * @return un string que és l'estat que ha introduït l'usuari passat a minúscules.
+     */
+    public static String viesPerEstat() {
+        return solicitarString("Buscar vies pel seu estat (tancada, construcció, apte):").toLowerCase();
+    }
+
+    /**
+     * Solicita a l'usuari un número per filtrar sectors amb més rutes disponibles que el número introduït.
+     *
+     * @return el número enter que ha introduit l'usuari.
+     */
+    public static Integer sectorsViesDisponibles() {
+        return Integer.valueOf(solicitarString("Mostrar els sectors amb més d'X vies disponibles, escriu un número:"));
+    }
+
+    /**
+     * Solicita a l'usuari que introdueixi el nom d'una escola per mostrar les vies més llargues d'aquesta.
+     *
+     * @return l'string que és el nom de l'escola que vol cercar.
+     */
+    public static String viesLlarguesEscola() {
+        return solicitarString("De quina escola vols veure les vies més llargues? (Escriu el nom");
+    }
 
     ///#####################################################################################################################################################################################///
     ///--------------------------------------------------------------------------- INPUTS --------------------------------------------------------------------------------------------------///
     ///#####################################################################################################################################################################################///
     /**
-     * Demana a l'usuari un missatge i recupera una cadena d'entrada de la consola.
+     * És una funció que permet introduir un missatge que vulguis a l'hora de demanar un input a l'usuari.
      *
      * @param missatge El missatge mostrat a l'usuari per sol·licitar l'entrada.
-     * @return La cadena introduïda per l'usuari.
+     * @return L'string introduïda per l'usuari.
      */
-    public static String solicitarString(String mensaje) {
-        System.out.println(mensaje);
+    public static String solicitarString(String missatge) {
+        System.out.println(missatge);
         return scanner.nextLine();
     }
 }

@@ -7,12 +7,11 @@ import java.sql.*;
 
 public class ViaDAO {
     /**
-     * Proveeix una connexió a la base de dades per a la classe ViaDAO.
-     * Aquest mètode estableix i torna un objecte de connexió usant la classe d'utilitat
-     * la classe d'utilitat ConnexioBD.
+     * Proveeix una connexió a la base de dades per a la classe ViaDAO. Aquest mètode estableix i torna un objecte
+     * de connexió usant la classe ConnexioBD.
      *
-     * @return un objecte Connection que representa la connexió a la base de dades
-     * @throws SQLException si passa un error d'accés a la base de dades
+     * @return un objecte Connection que representa la connexió a la base de dades.
+     * @throws SQLException si passa un error d'accés a la base de dades.
      */
     public static Connection ViaDAO() throws SQLException {
         return ConnexioBD.getConnexio();
@@ -21,13 +20,12 @@ public class ViaDAO {
     /**
      * Insereix un nou registre Via a la base de dades.
      *
-     * @param via l'objecte Via que conté les dades a inserir a la base de dades.
-     * Inclou camps com nom, longitud, dificultat, orientació, tipus,
-     * estat, tipus d'àncora, tipus de roca, ID de creador, ID d'escola i ID de sector.
+     * @param via l'objecte Via que conté les dades a inserir a la base de dades. Inclou camps com nom, longitud,
+     * dificultat, orientació, tipus, estat, tipus d'àncora, tipus de roca, ID de creador, ID d'escola i ID de sector.
      * @throws SQLException si es produeix un error d'accés a la base de dades durant el procés d'inserció.
      */
     public static void afegirVia(Via via) throws SQLException {
-        String sql = "INSERT INTO vies (nom, llargada, grau_dificultat, orientacio, tipus, estat, ancoratges, tipus_roca, creador_id, escola_id, sector_id) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO vies (nom, llargada, grau_dificultat, orientacio, tipus, estat, ancoratges, tipus_roca, creador_id, sector_id) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
         Connection con = Model.ConnexioBD.getConnexio();
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -40,8 +38,8 @@ public class ViaDAO {
             ps.setString(7, via.getAncoratge());
             ps.setString(8, via.getRoca());
             ps.setInt(9, via.getCreador_id());
-            ps.setInt(10, via.getEscola_id());
-            ps.setInt(11, via.getSector_id());
+            ps.setInt(10, via.getSector_id());
+
             Integer filesTornades = ps.executeUpdate();
             if (filesTornades >= 0) {
                 System.out.println("Vía insertada correctament.");
@@ -53,13 +51,13 @@ public class ViaDAO {
     }
 
     /**
-     * Modifica un camp específic d'una via en la base de dades, identificat pel seu nom.
-     * Aquest mètode permet actualitzar el valor d'un camp amb un nou valor proporcionat.
+     * Modifica un camp específic d'una via en la base de dades, identificat pel seu nom. Aquest mètode permet actualitzar
+     * el valor d'un camp amb un nou valor proporcionat.
      *
-     * @param nom el nom de la via que es vol modificar
-     * @param camp el nom del camp que es vol modificar (ha d'existir a la base de dades)
-     * @param nouValor el nou valor que es vol establir per al camp especificat
-     * @throws SQLException si es produeix un error d'accés a la base de dades durant l'operació
+     * @param nom el nom de la via que es vol modificar.
+     * @param camp el nom del camp que es vol modificar (ha d'existir a la base de dades).
+     * @param nouValor el nou valor que es vol establir per al camp especificat.
+     * @throws SQLException si es produeix un error d'accés a la base de dades durant l'operació.
      */
     public static void modificarVia(String nom, String camp, String nouValor) throws SQLException {
         String query = "UPDATE vies SET " + camp + " = ? WHERE nom = ?";
@@ -94,15 +92,15 @@ public class ViaDAO {
     }
 
     /**
-     * Elimina un registre de la taula 'vies' a la base de dades basada en l'ID de l'escola proporcionada.
+     * Elimina un registre de la taula 'vies' a la base de dades basada en l'ID de la via proporcionada.
      * Si el registre específic existeix, serà eliminat. Si no existeix, es mostrarà un missatge indicant el contrari.
      *
-     * @param id_escola l'identificador de l'escola associada a la via que es vol eliminar
+     * @param id_via l'identificador de la via associada que es vol eliminar
      * @throws SQLException si es produeix un error d'accés a la base de dades durant l'operació
      */
     public static void eliminarVia(Integer id_escola) throws SQLException {
         Connection con = Model.ConnexioBD.getConnexio();
-        String query = "DELETE FROM vies WHERE id_escola = ?;";
+        String query = "DELETE FROM vies WHERE id_via = ?;";
 
         try (PreparedStatement ps = con.prepareStatement(query)) {
             ps.setInt(1, id_escola);
@@ -120,12 +118,10 @@ public class ViaDAO {
     }
 
     /**
-     * Llista una única via (ruta d'escalada) de la base de dades basant-se en l'ID d'escola proporcionada.
+     * Llista una única via de la base de dades basant-se en l'ID proporcionat.
      * Executa una consulta per recuperar informació detallada sobre una via incloent-hi les seves propietats
-     * com a nom, longitud, dificultat, orientació, i noms associats de l'escola, sector,
-     * i creador.
      *
-     * @param id_escola l'ID del col·legi associat a la via a recuperar
+     * @param id_via l'ID de la via que es vol veure.
      * @throws SQLException si es produeix un error durant l'accés a la base de dades o l'execució de la consulta
      */
     public static void llistarUnaVia(Integer id_escola) throws SQLException {
@@ -148,7 +144,7 @@ public class ViaDAO {
                         "a.nom AS nom_creador " +
                         "FROM vies v " +
                         "JOIN sectors s ON v.sector_id = s.id_sector " +
-                        "JOIN escoles e ON v.escola_id = e.id_escola " +
+                        "JOIN escoles e ON s.escola_id = e.id_escola " +
                         "LEFT JOIN escaladors a ON v.creador_id = a.id_escalador;" +
                         "WHERE v.id_via = ?;";
 
@@ -165,15 +161,10 @@ public class ViaDAO {
     }
 
     /**
-     * Llista totes les rutes d'escalada («vies») emmagatzemades a la base de dades juntament amb els detalls associats.
-     * Aquest mètode recupera registres de la base de dades que proporcionen informació detallada sobre cada ruta,
-     * com el nom, longitud, nivell de dificultat, orientació, tipus, estat, data del darrer canvi d'estat,
-     * tipus d'ancoratge, tipus de roca, horari no apte, sector associat, escola i creador.
+     * Llista totes les vies emmagatzemades a la base de dades juntament amb els detalls associats.
+     * Aquest mètode recupera registres de la base de dades que proporcionen tota la informació detallada sobre cada via.
      *
      * Les dades es mostren en una sortida formatada, amb les propietats de cada ruta mostrades de forma organitzada.
-     *
-     * La consulta uneix múltiples taules incloent 'vies', 'sectors', 'escoles' i possiblement 'escaladors'
-     * per garantir que es recuperen totes les dades rellevants sobre cada ruta.
      *
      * @throws SQLException si es produeix un error d'accés a la base de dades o falla l'execució de la consulta.
      */
@@ -197,7 +188,7 @@ public class ViaDAO {
                             "a.nom AS nom_escalador " +
                             "FROM vies v " +
                             "JOIN sectors s ON v.sector_id = s.id_sector " +
-                            "JOIN escoles e ON v.escola_id = e.id_escola " +
+                            "JOIN escoles e ON s.escola_id = e.id_escola " +
                             "LEFT JOIN escaladors a ON v.creador_id = a.id_escalador;";
 
         try (PreparedStatement ps = con.prepareStatement(query);

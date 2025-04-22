@@ -1,7 +1,9 @@
 package Controlador;
 import java.sql.SQLException;
 import static Controlador.Menus_Demanar_Dades.*;
+import static Model.DAO.EscaladorsDAO.*;
 import static Model.DAO.EscolaDAO.*;
+import static Model.DAO.EstadistiquesVariesDAO.*;
 import static Model.DAO.SectorDAO.*;
 import static Model.DAO.ViaDAO.*;
 import static Vista.Vista.*;
@@ -12,12 +14,12 @@ public class Controlador {
     ///----------------------------------------------------------------------- MENU PRINCIPAL ----------------------------------------------------------------------------------------------///
     ///#####################################################################################################################################################################################///
     /**
-     * Mostra el menú principal de l'aplicació, permetent a l'usuari seleccionar diferents opcions
-     * i navegar als submenús. El menú funciona amb bucle fins que l'usuari selecciona l'opció de sortida.
+     * Mostra el menú principal de l'aplicació, permetent a l'usuari seleccionar diferents opcions i navegar als submenús.
+     * El menú funciona amb bucle fins que l'usuari selecciona l'opció de sortida.
      *
-     * El mètode maneja l'entrada de l'usuari a través d'una sèrie d'indicacions de menú, processa les seleccions a través d'una sentència switch i crida submenús específics.
-     * i truca a mètodes específics del submenú basant-se en l'elecció de l'usuari. Les entrades no vàlides sol·licitaran
-     * que el menú es mostri de nou.
+     * El mètode maneja l'entrada de l'usuari a través d'una sèrie d'indicacions de menú, processa les seleccions a
+     * través d'una sentència switch i truca a mètodes específics del submenú basant-se en l'elecció de l'usuari.
+     * Les entrades no vàlides sol·licitaran que el menú es mostri de nou.
      *
      * En cas d'excepcions, el missatge d'error s'imprimeix a la consola.
      */
@@ -38,7 +40,7 @@ public class Controlador {
                         viesMenu();
                         break;
                     case "4":
-                        menuEscaladors();
+                        escaladorsMenu();
                         break;
                     case "5":
                         menuEstadistiques();
@@ -61,7 +63,8 @@ public class Controlador {
     ///#####################################################################################################################################################################################///
     /**
      * Mostra i gestiona el menú d'operacions relacionades amb escoles.
-     * Si els usuaris seleccionen una opció no vàlida, el menú reapareixerà fins que s'introdueixi una opció vàlida o se seleccioneu l'opció sortir.
+     * Si els usuaris seleccionen una opció no vàlida, el menú reapareixerà fins que s'introdueixi una opció vàlida o
+     * se seleccioni l'opció sortir. Aquest mètode pot implicar interaccions amb la base de dades.
      *
      * @throws SQLException si es produeix algun error a la base de dades durant operacions com la creació, actualització o llistat d'escoles.
      */
@@ -100,12 +103,11 @@ public class Controlador {
     ///--------------------------------------------------------------------- MENU DELS SECTORS ---------------------------------------------------------------------------------------------///
     ///#####################################################################################################################################################################################///
     /**
-     * Maneja el flux de menús per a la gestió de sectors, permetent a l'usuari realitzar diverses
-     * operacions CRUD relacionades amb els sectors.
-     * Aquest mètode pot implicar interaccions amb la base de dades i llança una excepció en cas derrors SQL durant qualsevol de les operacions relacionades amb la base de dades.
-     * cas d'errors SQL durant qualsevol de les operacions relacionades amb la base de dades.
+     * Mostra i gestiona el menú d'operacions relacionades amb sectors.
+     * Si els usuaris seleccionen una opció no vàlida, el menú reapareixerà fins que s'introdueixi una opció vàlida o
+     * se seleccioni l'opció sortir. Aquest mètode pot implicar interaccions amb la base de dades.
      *
-     * @throws SQLException Si es produeix un error en accedir a la base de dades.
+     * @throws SQLException si es produeix algun error a la base de dades durant operacions com la creació, actualització o llistat de sectors.
      */
     public static void sectorsMenu() throws SQLException {
         String opcio;
@@ -142,10 +144,11 @@ public class Controlador {
     ///---------------------------------------------------------------------- MENU DE LES VIES ---------------------------------------------------------------------------------------------///
     ///#####################################################################################################################################################################################///
     /**
-     * Mostra i gestiona el menú d'operacions Via. Aquest mètode permet a l'usuari
-     * realitzar diverses operacions CRUD relacionades amb Via a través de diferents opcions.
-     * @throws SQLException si es produeix un error en accedir a la base de dades durant alguna
-     * de les operacions «Via».
+     * Mostra i gestiona el menú d'operacions relacionades amb vies.
+     * Si els usuaris seleccionen una opció no vàlida, el menú reapareixerà fins que s'introdueixi una opció vàlida o
+     * se seleccioni l'opció sortir. Aquest mètode pot implicar interaccions amb la base de dades.
+     *
+     * @throws SQLException si es produeix algun error a la base de dades durant operacions com la creació, actualització o llistat de vies.
      */
     public static void viesMenu() throws SQLException {
         String opcio;
@@ -173,9 +176,94 @@ public class Controlador {
                     return;
                 default:
                     System.out.println("Opció no vàlida.");
-                    menuSectors();
+                    menuVies();
             }
         } while (opcio != "-1");
     }
 
+    /**
+     * Mostra i gestiona el menú d'operacions relacionades amb escaladors.
+     * Si els usuaris seleccionen una opció no vàlida, el menú reapareixerà fins que s'introdueixi una opció vàlida o
+     * se seleccioni l'opció sortir. Aquest mètode pot implicar interaccions amb la base de dades.
+     *
+     * @throws SQLException si es produeix algun error a la base de dades durant operacions com la creació, actualització o llistat d'escaladors.
+     */
+    public static void escaladorsMenu() throws SQLException {
+        String opcio;
+        do {
+            menuEscaladors();
+            opcio = solicitarString("Introdueix el número de l'elecció:");
+            switch (opcio) {
+                case "1":
+                    afegirEscalador(crearEscalador());
+                    break;
+                case "2":
+                    editarEscalador();
+                    break;
+                case "3":
+                    llistarUnEscalador(llistarEscalador());
+                    break;
+                case "4":
+                    llistarTotsEscaladors();
+                    break;
+                case "5":
+                    eliminarEscalador(esborrarEscalador());
+                    break;
+                case "0":
+                    System.out.println("Tornant enrere...");
+                    return;
+                default:
+                    System.out.println("Opció no vàlida.");
+                    menuEscaladors();
+            }
+        } while (opcio != "-1");
+    }
+
+    /**
+     * Mostra i gestiona el menú d'operacions relacionades amb estadístiques més variades.
+     * Si els usuaris seleccionen una opció no vàlida, el menú reapareixerà fins que s'introdueixi una opció vàlida o
+     * se seleccioni l'opció sortir. Aquest mètode pot implicar interaccions amb la base de dades.
+     *
+     * @throws SQLException si es produeix algun error a la base de dades durant les operacions de SELECT.
+     */
+    public static void estadistiquesMenu() throws SQLException {
+        String opcio;
+        do {
+            menuEscaladors();
+            opcio = solicitarString("Introdueix el número de l'elecció:");
+            switch (opcio) {
+                case "1":
+                    mostrarViesDisponibles(viesDisponibles());
+                    break;
+                case "2":
+                    String[] dificultats = viesPerDificultat();
+                    cercarViesPerDificultat(dificultats[0], dificultats[1]);
+                    break;
+                case "3":
+                    cercarViesPerEstat(viesPerEstat());
+                    break;
+                case "4":
+                    escolesAmbRestriccions();
+                    break;
+                case "5":
+                    sectorsViesDisponibles(sectorsViesDisponibles());
+                    break;
+                case "6":
+                    escaladorsAmbMateixNivell();
+                    break;
+                case "7":
+                    viesRecentmentApte();
+                    break;
+                case "8":
+                    viesMesLlarguesPerEscola(viesLlarguesEscola());
+                    break;
+                case "0":
+                    System.out.println("Tornant enrere...");
+                    return;
+                default:
+                    System.out.println("Opció no vàlida.");
+                    menuEscaladors();
+            }
+        } while (opcio != "-1");
+    }
 }
